@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Full Stack JavaScript</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="jumbotron text-center">
+        <h1 class="display-3">Full Stack JavaScript,</h1>
+        <p class="lead">Progressive Web Apps.</p>
+        <hr class="my-4" />
+        <p>Some information of PWAs.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h3 class="text-center">Search For Players</h3>
+            <!-- <form action="" id="searchForm">
+          <input
+            type="text"
+            class="form-control"
+            id="searchText"
+            placeholder="Search User..."
+          />
+        </form> -->
+
+            <div>
+                <button id="searchForm" type="button" class="btn btn-secondary" onclick="getAllUsers()">Search
+                    Users</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="table">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Height</th>
+                    <th scope="col">Mass</th>
+                    <th scope="col">Hair Color</th>
+                    <th scope="col">Skin Color</th>
+                    <th scope="col">Eye Color</th>
+                    <th scope="col">Birth Year</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Edited</th>
+                </tr>
+            </thead>
+            <tbody id="users"></tbody>
+        </table>
+
+        <div class="showCenter mb-3">
+            <ul class="pagination pagination-lg" id="pagination">
+                <li class="azert" id="prev">
+                    <a class="page-link" onclick="showPrevious()">&laquo; previous</a>
+                </li>
+
+                <li id="next">
+                    <a class="page-link" onclick="showNext()">next &raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+
+</html>

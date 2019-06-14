@@ -1,0 +1,14 @@
+{
+  "name": "SWApi",
+  "version": "1.0.0",
+  "description": "Javascript, PWAs, Web,  Test Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -c-1"
+  },
+  "author": "Abousaid Salah-Eddine",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
