@@ -2,11 +2,26 @@ const table = document.getElementById('table');
 const pagination = document.getElementById('pagination');
 const previous = document.getElementById('prev');
 const next = document.getElementById('next');
+const searchBtn = document.getElementById('searchForm');
 
 const url = "https://swapi.co/api/people/?format=json&page=1";
 
-function getAllUsers() {
+var dataArray;
+var dataSort;
 
+
+/*
+  D : Default
+  M : Mass
+  H : Height
+*/
+
+var typeSort = 'D';
+
+
+
+function getAllUsers() {
+  typeSort = 'D';
   getUsers(url);
 }
 
@@ -17,7 +32,21 @@ function getUsers(url) {
 
       infoUsers = resp.data;
 
-      addLignes(infoUsers);
+      if (infoUsers) {
+        searchBtn.classList.remove("searchForm");
+      } else {
+        searchBtn.classList.add("searchForm");
+      }
+
+      if (typeSort === 'N') {
+        GetUserOrderByName();
+      } else if (typeSort === 'H') {
+        GetUserOrderByHeight();
+      } else if (typeSort === 'M') {
+        GetUserOrderByMass();
+      } else if (typeSort === 'D') {
+        addLignes(infoUsers.results);
+      }
 
       if (infoUsers.next) {
         next.classList.remove("removeBtn");
@@ -38,10 +67,12 @@ function getUsers(url) {
     });
 };
 
-
+// Show Lines of Data
 function addLignes(infoUsers) {
+
   let output = "";
-  $.each(infoUsers.results, (index, users) => {
+
+  $.each(infoUsers, (index, users) => {
     if (index % 2 == 0) {
       output += `
             <tr class="table-active" >
@@ -79,9 +110,56 @@ function addLignes(infoUsers) {
 }
 
 function showPrevious() {
+
   getUsers(infoUsers.previous);
+  if (typeSort === 'N') {
+    GetUserOrderByName();
+  } else if (typeSort === 'H') {
+    GetUserOrderByHeight();
+  } else if (typeSort === 'M') {
+    GetUserOrderByMass();
+  } else if (typeSort === 'D') {
+    addLignes(infoUsers.results);
+  }
+
+
 }
 
 function showNext() {
   getUsers(infoUsers.next);
+
 }
+
+
+// Sort Order By Name
+function GetUserOrderByName() {
+  typeSort = 'N';
+  dataArray = Object.keys(infoUsers.results).map(i => infoUsers.results[i]);
+  dataSort = dataArray.sort(funSortByName);
+  addLignes(dataSort);
+}
+
+// function that Order the data by name
+function funSortByName(a, b) {
+  return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1;
+}
+
+// Sort Order By Height
+function GetUserOrderByHeight() {
+  typeSort = 'H';
+  dataArray = Object.keys(infoUsers.results).map(i => infoUsers.results[i]);
+
+  dataSort = dataArray.sort((a, b) => a.height - b.height);
+  addLignes(dataSort);
+}
+
+// Sort Order By Mass
+function GetUserOrderByMass() {
+  typeSort = 'M';
+  dataArray = Object.keys(infoUsers.results).map(i => infoUsers.results[i]);
+
+  dataSort = dataArray.sort((a, b) => a.mass - b.mass);
+  addLignes(dataSort);
+}
+
+
