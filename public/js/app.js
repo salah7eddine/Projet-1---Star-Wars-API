@@ -13,7 +13,7 @@ var dataSort;
 /*
   D : Default
   M : Mass
-  H : Height
+  H : height
 */
 
 var typeSort = 'D';
